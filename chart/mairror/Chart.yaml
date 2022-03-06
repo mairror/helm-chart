@@ -6,4 +6,8 @@ type: application
 
 version: 0.0.1
 
+maintainers:
+  - name: Alejandro Aceituna
+  - name: Borja López
+
 appVersion: "v1.0.0"
