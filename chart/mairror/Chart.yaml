@@ -1,0 +1,9 @@
+apiVersion: v2
+name: mairror
+description: A helm chart to deploy mairror application
+
+type: application
+
+version: 0.0.1
+
+appVersion: "v1.0.0"

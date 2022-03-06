@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mairror_processor.fullname" . }}
+  labels:
+    {{- include "mairror_processor.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.mairror_processor.autoscaling.enabled }}
+  replicas: {{ .Values.mairror_processor.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "mairror_processor.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.mairror_processor.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mairror_processor.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.mairror_processor.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mairror_processor.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.mairror_processor.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Values.mairror_processor.container.name }}
+          securityContext:
+            {{- toYaml .Values.mairror_processor.securityContext | nindent 12 }}
+          image: "{{ .Values.mairror_processor.image.repository }}:{{ .Values.mairror_processor.image.tag }}"
+          imagePullPolicy: {{ .Values.mairror_processor.image.pullPolicy }}
+          #livenessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: processor
+          #readinessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: processor
+{{- if .Values.mairror_processor.secrets.create -}}
+          envFrom:
+          - secretRef:
+              name: {{ .Values.mairror_processor.secrets.name }}
+{{- end }}
+          resources:
+            {{- toYaml .Values.mairror_processor.resources | nindent 12 }}
+            {{- with .Values.mairror_processor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mairror_processor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mairror_processor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
