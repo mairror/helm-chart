@@ -1,8 +1,10 @@
 mairror_api:
   # -- This is the fullname
   fullname: "Mairror API"
+  # -- Enable autoscaling
   autoscaling:
     enabled: false
+  # type(int) -- Replica count number
   replicaCount: 1
   podAnnotations: {}
   securityContext:
@@ -111,4 +113,46 @@ mairror_processor:
   secrets:
     create: false
     name: mairror-processor-secret
+    values: {}
+
+mairror_predictor:
+  # -- This is the fullname
+  fullname: "Mairror Predictor"
+  # -- Enable autoscaling
+  autoscaling:
+    enabled: false
+  # type(int) -- Replica count number
+  replicaCount: 1
+  podAnnotations: {}
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+  podSecurityContext:
+    fsGroup: 1000
+  serviceAccount:
+    create: false
+    name: mairror-api
+  image:
+    pullPolicy: IfNotPresent
+    repository: mairror/mairror-predictor
+    tag: latest
+  container:
+    name: mairror-predictor
+  affinity: {}
+  tolerations: []
+  nodeSelector: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    port: 8000
+    annotations: {}
+  secrets:
+    create: false
+    name: mairror-predictor-secret
     values: {}

@@ -18,7 +18,7 @@ To install the chart with the release name `my-release`:
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | mairror_api.affinity | object | `{}` |  |
-| mairror_api.autoscaling.enabled | bool | `false` |  |
+| mairror_api.autoscaling | object | `{"enabled":false}` | Enable autoscaling |
 | mairror_api.container.name | string | `"mairror-api"` |  |
 | mairror_api.fullname | string | `"Mairror API"` | This is the fullname |
 | mairror_api.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -70,6 +70,32 @@ To install the chart with the release name `my-release`:
 | mairror_bot.serviceAccount.create | bool | `false` |  |
 | mairror_bot.serviceAccount.name | string | `"mairror-bot"` |  |
 | mairror_bot.tolerations | list | `[]` |  |
+| mairror_predictor.affinity | object | `{}` |  |
+| mairror_predictor.autoscaling | object | `{"enabled":false}` | Enable autoscaling |
+| mairror_predictor.container.name | string | `"mairror-predictor"` |  |
+| mairror_predictor.fullname | string | `"Mairror Predictor"` | This is the fullname |
+| mairror_predictor.image.pullPolicy | string | `"IfNotPresent"` |  |
+| mairror_predictor.image.repository | string | `"mairror/mairror-predictor"` |  |
+| mairror_predictor.image.tag | string | `"latest"` |  |
+| mairror_predictor.nodeSelector | object | `{}` |  |
+| mairror_predictor.podAnnotations | object | `{}` |  |
+| mairror_predictor.podSecurityContext.fsGroup | int | `1000` |  |
+| mairror_predictor.replicaCount | int | `1` |  |
+| mairror_predictor.resources.limits.cpu | string | `"100m"` |  |
+| mairror_predictor.resources.limits.memory | string | `"128Mi"` |  |
+| mairror_predictor.resources.requests.cpu | string | `"100m"` |  |
+| mairror_predictor.resources.requests.memory | string | `"128Mi"` |  |
+| mairror_predictor.secrets.create | bool | `false` |  |
+| mairror_predictor.secrets.name | string | `"mairror-predictor-secret"` |  |
+| mairror_predictor.secrets.values | object | `{}` |  |
+| mairror_predictor.securityContext.runAsGroup | int | `1000` |  |
+| mairror_predictor.securityContext.runAsUser | int | `1000` |  |
+| mairror_predictor.service.annotations | object | `{}` |  |
+| mairror_predictor.service.port | int | `8000` |  |
+| mairror_predictor.service.type | string | `"ClusterIP"` |  |
+| mairror_predictor.serviceAccount.create | bool | `false` |  |
+| mairror_predictor.serviceAccount.name | string | `"mairror-api"` |  |
+| mairror_predictor.tolerations | list | `[]` |  |
 | mairror_processor.affinity | object | `{}` |  |
 | mairror_processor.autoscaling.enabled | bool | `false` |  |
 | mairror_processor.container.name | string | `"mairror-processor"` |  |

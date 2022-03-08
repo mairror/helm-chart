@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mairror_predictor.fullname" . }}
+  labels:
+    {{- include "mairror_predictor.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.mairror_predictor.autoscaling.enabled }}
+  replicas: {{ .Values.mairror_predictor.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "mairror_predictor.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.mairror_predictor.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mairror_predictor.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.mairror_predictor.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mairror_predictor.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.mairror_predictor.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Values.mairror_predictor.container.name }}
+          securityContext:
+            {{- toYaml .Values.mairror_predictor.securityContext | nindent 12 }}
+          image: "{{ .Values.mairror_predictor.image.repository }}:{{ .Values.mairror_predictor.image.tag }}"
+          imagePullPolicy: {{ .Values.mairror_predictor.image.pullPolicy }}
+          ports:
+            - name: predictor
+              containerPort: 8000
+              protocol: TCP
+          #livenessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: predictor
+          #readinessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: predictor
+{{- if .Values.mairror_predictor.secrets.create -}}
+          envFrom:
+          - secretRef:
+              name: {{ .Values.mairror_predictor.secrets.name }}
+{{- end }}
+          resources:
+            {{- toYaml .Values.mairror_predictor.resources | nindent 12 }}
+            {{- with .Values.mairror_predictor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mairror_predictor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mairror_predictor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
