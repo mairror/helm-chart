@@ -27,7 +27,7 @@ jobs:
         uses: helm/chart-testing-action@v2.2.0
 
       - name: Run chart-testing (lint)
-        run: ct lint --all --config ct.yaml --lint-conf helmlintconf.yaml
+        run: ct lint --all --config ct.yaml --lint-conf helmlint.conf
 
   test-chart:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.20.1
+          - v1.20.15
           - v1.21.1
     steps:
       - name: Checkout
@@ -59,7 +59,7 @@ jobs:
       - name: Run chart-testing
         id: list-changed
         run: |
-          changed=$(ct list-changed)
+          changed=$(ct list-changed --chart-dirs chart --config ct.yaml --target-branch main)
           if [[ -n "$changed" ]]; then
             echo "::set-output name=changed::true"
           fi
