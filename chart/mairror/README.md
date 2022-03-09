@@ -23,7 +23,7 @@ To install the chart with the release name `my-release`:
 | mairror_api.fullname | string | `"Mairror API"` | This is the fullname |
 | mairror_api.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mairror_api.image.repository | string | `"mairror/mairror-api"` |  |
-| mairror_api.image.tag | string | `"latest"` |  |
+| mairror_api.image.tag | string | `"v1.1.0"` |  |
 | mairror_api.ingress.annotations | object | `{}` |  |
 | mairror_api.ingress.enabled | bool | `false` |  |
 | mairror_api.ingress.hosts | list | `[]` |  |
@@ -44,7 +44,7 @@ To install the chart with the release name `my-release`:
 | mairror_api.service.annotations | object | `{}` |  |
 | mairror_api.service.port | int | `8000` |  |
 | mairror_api.service.type | string | `"ClusterIP"` |  |
-| mairror_api.serviceAccount.create | bool | `false` |  |
+| mairror_api.serviceAccount.create | bool | `true` |  |
 | mairror_api.serviceAccount.name | string | `"mairror-api"` |  |
 | mairror_api.tolerations | list | `[]` |  |
 | mairror_bot.affinity | object | `{}` |  |
@@ -53,7 +53,7 @@ To install the chart with the release name `my-release`:
 | mairror_bot.fullname | string | `"Mairror Bot"` |  |
 | mairror_bot.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mairror_bot.image.repository | string | `"mairror/mairror-bot"` |  |
-| mairror_bot.image.tag | string | `"latest"` |  |
+| mairror_bot.image.tag | string | `"v1.1.0"` |  |
 | mairror_bot.nodeSelector | object | `{}` |  |
 | mairror_bot.podAnnotations | object | `{}` |  |
 | mairror_bot.podSecurityContext.fsGroup | int | `1000` |  |
@@ -67,15 +67,16 @@ To install the chart with the release name `my-release`:
 | mairror_bot.secrets.values | object | `{}` |  |
 | mairror_bot.securityContext.runAsGroup | int | `1000` |  |
 | mairror_bot.securityContext.runAsUser | int | `1000` |  |
-| mairror_bot.serviceAccount.create | bool | `false` |  |
+| mairror_bot.serviceAccount.create | bool | `true` |  |
 | mairror_bot.serviceAccount.name | string | `"mairror-bot"` |  |
 | mairror_bot.tolerations | list | `[]` |  |
 | mairror_predictor.affinity | object | `{}` |  |
 | mairror_predictor.autoscaling | object | `{"enabled":false}` | Enable autoscaling |
 | mairror_predictor.container.name | string | `"mairror-predictor"` |  |
+| mairror_predictor.enabled | bool | `true` |  |
 | mairror_predictor.fullname | string | `"Mairror Predictor"` | This is the fullname |
 | mairror_predictor.image.pullPolicy | string | `"IfNotPresent"` |  |
-| mairror_predictor.image.repository | string | `"mairror/mairror-predictor"` |  |
+| mairror_predictor.image.repository | string | `"mairror/mairror-api"` |  |
 | mairror_predictor.image.tag | string | `"latest"` |  |
 | mairror_predictor.nodeSelector | object | `{}` |  |
 | mairror_predictor.podAnnotations | object | `{}` |  |
@@ -93,8 +94,8 @@ To install the chart with the release name `my-release`:
 | mairror_predictor.service.annotations | object | `{}` |  |
 | mairror_predictor.service.port | int | `8000` |  |
 | mairror_predictor.service.type | string | `"ClusterIP"` |  |
-| mairror_predictor.serviceAccount.create | bool | `false` |  |
-| mairror_predictor.serviceAccount.name | string | `"mairror-api"` |  |
+| mairror_predictor.serviceAccount.create | bool | `true` |  |
+| mairror_predictor.serviceAccount.name | string | `"mairror-predictor"` |  |
 | mairror_predictor.tolerations | list | `[]` |  |
 | mairror_processor.affinity | object | `{}` |  |
 | mairror_processor.autoscaling.enabled | bool | `false` |  |
@@ -102,7 +103,7 @@ To install the chart with the release name `my-release`:
 | mairror_processor.fullname | string | `"Mairror Processor"` |  |
 | mairror_processor.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mairror_processor.image.repository | string | `"mairror/mairror-processor"` |  |
-| mairror_processor.image.tag | string | `"latest"` |  |
+| mairror_processor.image.tag | string | `"v1.0.0"` |  |
 | mairror_processor.nodeSelector | object | `{}` |  |
 | mairror_processor.podAnnotations | object | `{}` |  |
 | mairror_processor.podSecurityContext.fsGroup | int | `1000` |  |
@@ -116,7 +117,7 @@ To install the chart with the release name `my-release`:
 | mairror_processor.secrets.values | object | `{}` |  |
 | mairror_processor.securityContext.runAsGroup | int | `1000` |  |
 | mairror_processor.securityContext.runAsUser | int | `1000` |  |
-| mairror_processor.serviceAccount.create | bool | `false` |  |
+| mairror_processor.serviceAccount.create | bool | `true` |  |
 | mairror_processor.serviceAccount.name | string | `"mairror-processor"` |  |
 | mairror_processor.tolerations | list | `[]` |  |
 

@@ -13,12 +13,12 @@ mairror_api:
   podSecurityContext:
     fsGroup: 1000
   serviceAccount:
-    create: false
+    create: true
     name: mairror-api
   image:
     pullPolicy: IfNotPresent
     repository: mairror/mairror-api
-    tag: latest
+    tag: v1.1.0
   container:
     name: mairror-api
   affinity: {}
@@ -57,12 +57,12 @@ mairror_bot:
   podSecurityContext:
     fsGroup: 1000
   serviceAccount:
-    create: false
+    create: true
     name: mairror-bot
   image:
     pullPolicy: IfNotPresent
     repository: mairror/mairror-bot
-    tag: latest
+    tag: v1.1.0
   container:
     name: mairror-bot
   affinity: {}
@@ -92,12 +92,12 @@ mairror_processor:
   podSecurityContext:
     fsGroup: 1000
   serviceAccount:
-    create: false
+    create: true
     name: mairror-processor
   image:
     pullPolicy: IfNotPresent
     repository: mairror/mairror-processor
-    tag: latest
+    tag: v1.0.0
   container:
     name: mairror-processor
   affinity: {}
@@ -116,6 +116,7 @@ mairror_processor:
     values: {}
 
 mairror_predictor:
+  enabled: true
   # -- This is the fullname
   fullname: "Mairror Predictor"
   # -- Enable autoscaling
@@ -130,11 +131,11 @@ mairror_predictor:
   podSecurityContext:
     fsGroup: 1000
   serviceAccount:
-    create: false
-    name: mairror-api
+    create: true
+    name: mairror-predictor
   image:
     pullPolicy: IfNotPresent
-    repository: mairror/mairror-predictor
+    repository: mairror/mairror-api
     tag: latest
   container:
     name: mairror-predictor
