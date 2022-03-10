@@ -25,7 +25,7 @@ jobs:
           owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
           echo "Creating release..."
           # package chart
-          ./cr package chart/$repo
+          ./cr package chart/mairror
           # upload chart to github releases
           ./cr upload \
               --owner "$owner" \
