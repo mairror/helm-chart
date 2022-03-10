@@ -59,7 +59,7 @@ To install the chart with the release name `my-release`:
 | mairror_bot.podSecurityContext.fsGroup | int | `1000` |  |
 | mairror_bot.replicaCount | int | `1` |  |
 | mairror_bot.resources.limits.cpu | string | `"100m"` |  |
-| mairror_bot.resources.limits.memory | string | `"128Milatest"` |  |
+| mairror_bot.resources.limits.memory | string | `"128Mi"` |  |
 | mairror_bot.resources.requests.cpu | string | `"100m"` |  |
 | mairror_bot.resources.requests.memory | string | `"128Mi"` |  |
 | mairror_bot.secrets.create | bool | `false` |  |
