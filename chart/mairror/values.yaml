@@ -18,7 +18,7 @@ mairror_api:
   image:
     pullPolicy: IfNotPresent
     repository: mairror/mairror-api
-    tag: v1.1.0
+    tag: latest
   container:
     name: mairror-api
   affinity: {}
@@ -62,7 +62,7 @@ mairror_bot:
   image:
     pullPolicy: IfNotPresent
     repository: mairror/mairror-bot
-    tag: v1.1.0
+    tag: latest
   container:
     name: mairror-bot
   affinity: {}
@@ -97,7 +97,7 @@ mairror_processor:
   image:
     pullPolicy: IfNotPresent
     repository: mairror/mairror-processor
-    tag: v1.3.0
+    tag: latest
   container:
     name: mairror-processor
   affinity: {}
@@ -135,8 +135,8 @@ mairror_predictor:
     name: mairror-predictor
   image:
     pullPolicy: IfNotPresent
-    repository: mairror/mairror-api
-    tag: v1.0.0
+    repository: mairror/mairror-predictor
+    tag: latest
   container:
     name: mairror-predictor
   affinity: {}
@@ -178,7 +178,7 @@ mairror_front:
   image:
     pullPolicy: IfNotPresent
     repository: mairror/mairror-front
-    tag: v1.0.2
+    tag: latest
   container:
     name: mairror-front
   affinity: {}
