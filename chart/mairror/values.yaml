@@ -1,0 +1,206 @@
+mairror_api:
+  # -- This is the fullname
+  fullname: "Mairror API"
+  # -- Enable autoscaling
+  autoscaling:
+    enabled: false
+  # type(int) -- Replica count number
+  replicaCount: 1
+  podAnnotations: {}
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+  podSecurityContext:
+    fsGroup: 1000
+  serviceAccount:
+    create: true
+    name: mairror-api
+  image:
+    pullPolicy: IfNotPresent
+    repository: mairror/mairror-api
+    tag: latest
+  container:
+    name: mairror-api
+  affinity: {}
+  tolerations: []
+  nodeSelector: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  ingress:
+    enabled: false
+    annotations: {}
+    tls: []
+    hosts: []
+  service:
+    type: ClusterIP
+    port: 8000
+    annotations: {}
+  secrets:
+    create: false
+    name: mairror-api-secret
+    values: {}
+
+mairror_bot:
+  fullname: "Mairror Bot"
+  autoscaling:
+    enabled: false
+  replicaCount: 1
+  podAnnotations: {}
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+  podSecurityContext:
+    fsGroup: 1000
+  serviceAccount:
+    create: true
+    name: mairror-bot
+  image:
+    pullPolicy: IfNotPresent
+    repository: mairror/mairror-bot
+    tag: latest
+  container:
+    name: mairror-bot
+  affinity: {}
+  tolerations: []
+  nodeSelector: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  secrets:
+    create: false
+    name: mairror-bot-secret
+    values: {}
+
+mairror_processor:
+  fullname: "Mairror Processor"
+  autoscaling:
+    enabled: false
+  replicaCount: 1
+  podAnnotations: {}
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+  podSecurityContext:
+    fsGroup: 1000
+  serviceAccount:
+    create: true
+    name: mairror-processor
+  image:
+    pullPolicy: IfNotPresent
+    repository: mairror/mairror-processor
+    tag: latest
+  container:
+    name: mairror-processor
+  affinity: {}
+  tolerations: []
+  nodeSelector: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  secrets:
+    create: false
+    name: mairror-processor-secret
+    values: {}
+
+mairror_predictor:
+  enabled: true
+  # -- This is the fullname
+  fullname: "Mairror Predictor"
+  # -- Enable autoscaling
+  autoscaling:
+    enabled: false
+  # type(int) -- Replica count number
+  replicaCount: 1
+  podAnnotations: {}
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+  podSecurityContext:
+    fsGroup: 1000
+  serviceAccount:
+    create: true
+    name: mairror-predictor
+  image:
+    pullPolicy: IfNotPresent
+    repository: mairror/mairror-predictor
+    tag: latest
+  container:
+    name: mairror-predictor
+  affinity: {}
+  tolerations: []
+  nodeSelector: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  service:
+    type: ClusterIP
+    port: 8000
+    annotations: {}
+  secrets:
+    create: false
+    name: mairror-predictor-secret
+    values: {}
+
+mairror_front:
+  # -- This is the fullname
+  fullname: "Mairror FRONT"
+  # -- Enable autoscaling
+  autoscaling:
+    enabled: false
+  # type(int) -- Replica count number
+  replicaCount: 1
+  podAnnotations: {}
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+  podSecurityContext:
+    fsGroup: 1000
+  serviceAccount:
+    create: true
+    name: mairror-front
+  image:
+    pullPolicy: IfNotPresent
+    repository: mairror/mairror-front
+    tag: latest
+  container:
+    name: mairror-front
+  affinity: {}
+  tolerations: []
+  nodeSelector: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  ingress:
+    enabled: false
+    annotations: {}
+    tls: []
+    hosts: []
+  service:
+    type: ClusterIP
+    port: 8501
+    annotations: {}
+  secrets:
+    create: false
+    name: mairror-front-secret
+    values: {}

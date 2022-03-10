@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mairror_bot.fullname" . }}
+  labels:
+    {{- include "mairror_bot.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.mairror_bot.autoscaling.enabled }}
+  replicas: {{ .Values.mairror_bot.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "mairror_bot.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.mairror_bot.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mairror_bot.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.mairror_bot.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mairror_bot.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.mairror_bot.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Values.mairror_bot.container.name }}
+          securityContext:
+            {{- toYaml .Values.mairror_bot.securityContext | nindent 12 }}
+          image: "{{ .Values.mairror_bot.image.repository }}:{{ .Values.mairror_bot.image.tag }}"
+          imagePullPolicy: {{ .Values.mairror_bot.image.pullPolicy }}
+          #livenessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: api
+          #readinessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: api
+{{- if .Values.mairror_bot.secrets.create -}}
+          envFrom:
+          - secretRef:
+              name: {{ .Values.mairror_bot.secrets.name }}
+{{- end }}
+          resources:
+            {{- toYaml .Values.mairror_bot.resources | nindent 12 }}
+            {{- with .Values.mairror_bot.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mairror_bot.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mairror_bot.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

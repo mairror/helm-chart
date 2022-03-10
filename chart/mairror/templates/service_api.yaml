@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mairror_api.fullname" . }}
+  labels:
+    {{- include "mairror_api.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.mairror_api.service.type }}
+  ports:
+    - port: {{ .Values.mairror_api.service.port }}
+      targetPort: api
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "mairror_api.selectorLabels" . | nindent 4 }}
