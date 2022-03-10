@@ -77,7 +77,7 @@ To install the chart with the release name `my-release`:
 | mairror_predictor.fullname | string | `"Mairror Predictor"` | This is the fullname |
 | mairror_predictor.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mairror_predictor.image.repository | string | `"mairror/mairror-api"` |  |
-| mairror_predictor.image.tag | string | `"latest"` |  |
+| mairror_predictor.image.tag | string | `"v1.0.0"` |  |
 | mairror_predictor.nodeSelector | object | `{}` |  |
 | mairror_predictor.podAnnotations | object | `{}` |  |
 | mairror_predictor.podSecurityContext.fsGroup | int | `1000` |  |
@@ -103,7 +103,7 @@ To install the chart with the release name `my-release`:
 | mairror_processor.fullname | string | `"Mairror Processor"` |  |
 | mairror_processor.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mairror_processor.image.repository | string | `"mairror/mairror-processor"` |  |
-| mairror_processor.image.tag | string | `"v1.0.0"` |  |
+| mairror_processor.image.tag | string | `"v1.2.0"` |  |
 | mairror_processor.nodeSelector | object | `{}` |  |
 | mairror_processor.podAnnotations | object | `{}` |  |
 | mairror_processor.podSecurityContext.fsGroup | int | `1000` |  |
