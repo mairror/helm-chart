@@ -38,5 +38,6 @@ jobs:
               --owner "$owner" \
               --git-repo "$repo" \
               --token "${{ secrets.GITHUB_TOKEN }}" \
+              --charts-repo "https://mairror.github.io/helm-chart" \
               --index-path index.yaml \
               --push
