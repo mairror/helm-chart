@@ -1,10 +1,10 @@
 {
   "branches": ["main"],
   "plugins": [
-    "semantic-release-helm",
+    "@semantic-release/semantic-release-helm",
     {
       "chartPath": "./chart",
-      "onlyUpdateVersion": true,
+      "onlyUpdateVersion": true
     },
     "@semantic-release/github", {
         "assets": [
