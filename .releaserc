@@ -3,14 +3,14 @@
   "plugins": [
     "semantic-release-helm",
     {
-      chartPath: './chart',
-      onlyUpdateVersion: true,
+      "chartPath": "./chart",
+      "onlyUpdateVersion": true,
     },
     "@semantic-release/github", {
         "assets": [
             { "path": "./chart/mairror/Chart.yaml", "label": "Chart file meta" }
         ]
-    }
+    },
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator"
   ]
