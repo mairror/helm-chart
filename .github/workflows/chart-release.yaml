@@ -38,6 +38,5 @@ jobs:
               --owner "$owner" \
               --git-repo "$repo" \
               --token "${{ secrets.GITHUB_TOKEN }}" \
-              --charts-repo chart \
               --index-path index.yaml \
               --push
