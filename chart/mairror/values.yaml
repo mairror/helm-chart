@@ -157,3 +157,50 @@ mairror_predictor:
     create: false
     name: mairror-predictor-secret
     values: {}
+
+mairror_front:
+  # -- This is the fullname
+  fullname: "Mairror FRONT"
+  # -- Enable autoscaling
+  autoscaling:
+    enabled: false
+  # type(int) -- Replica count number
+  replicaCount: 1
+  podAnnotations: {}
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+  podSecurityContext:
+    fsGroup: 1000
+  serviceAccount:
+    create: true
+    name: mairror-front
+  image:
+    pullPolicy: IfNotPresent
+    repository: mairror/mairror-front
+    tag: v1.0.2
+  container:
+    name: mairror-front
+  affinity: {}
+  tolerations: []
+  nodeSelector: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  ingress:
+    enabled: false
+    annotations: {}
+    tls: []
+    hosts: []
+  service:
+    type: ClusterIP
+    port: 8501
+    annotations: {}
+  secrets:
+    create: false
+    name: mairror-front-secret
+    values: {}

@@ -13,6 +13,10 @@ Expand the name of the chart.
 {{- default "mairror-bot" .Values.mairror_bot.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
+{{- define "mairror_front.name" -}}
+{{- default "mairror-front" .Values.mairror_front.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
 {{- define "mairror_processor.name" -}}
 {{- default "mairror-processor" .Values.mairror_processor.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
@@ -53,6 +57,19 @@ If release name contains chart name it will be used as a full name.
 {{- .Values.mairror_bot.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
 {{- $name := default "mairror-bot" .Values.mairror_bot.nameOverride }}
+{{- if contains $name .Release.Name }}
+{{- .Release.Name | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- define "mairror_front.fullname" -}}
+{{- if .Values.mairror_front.fullnameOverride }}
+{{- .Values.mairror_front.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- $name := default "mairror-front" .Values.mairror_front.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -111,6 +128,15 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
+{{- define "mairror_front.labels" -}}
+helm.sh/chart: {{ include "mairror.chart" . }}
+{{ include "mairror_front.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
 {{- define "mairror_processor.labels" -}}
 helm.sh/chart: {{ include "mairror.chart" . }}
 {{ include "mairror_processor.selectorLabels" . }}
@@ -135,6 +161,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 
 {{- define "mairror_bot.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "mairror_bot.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{- define "mairror_front.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "mairror_front.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
@@ -167,6 +198,14 @@ Create the name of the service account to use
 {{- default (include "mairror_bot.fullname" .) .Values.mairror_bot.serviceAccount.name }}
 {{- else }}
 {{- default "mairror-bot" .Values.mairror_bot.serviceAccount.name }}
+{{- end }}
+{{- end }}
+
+{{- define "mairror_front.serviceAccountName" -}}
+{{- if .Values.mairror_front.serviceAccount.create }}
+{{- default (include "mairror_front.fullname" .) .Values.mairror_front.serviceAccount.name }}
+{{- else }}
+{{- default "mairror-front" .Values.mairror_front.serviceAccount.name }}
 {{- end }}
 {{- end }}
 

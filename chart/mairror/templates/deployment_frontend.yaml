@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mairror_front.fullname" . }}
+  labels:
+    {{- include "mairror_front.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.mairror_front.autoscaling.enabled }}
+  replicas: {{ .Values.mairror_front.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "mairror_front.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.mairror_front.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mairror_front.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.mairror_front.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mairror_front.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.mairror_front.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Values.mairror_front.container.name }}
+          securityContext:
+            {{- toYaml .Values.mairror_front.securityContext | nindent 12 }}
+          image: "{{ .Values.mairror_front.image.repository }}:{{ .Values.mairror_front.image.tag }}"
+          imagePullPolicy: {{ .Values.mairror_front.image.pullPolicy }}
+          ports:
+            - name: front
+              containerPort: 8501
+              protocol: TCP
+          #livenessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: front
+          #readinessProbe:
+          #  httpGet:
+          #    path: /
+          #    port: front
+{{- if .Values.mairror_front.secrets.create -}}
+          envFrom:
+          - secretRef:
+              name: {{ .Values.mairror_front.secrets.name }}
+{{- end }}
+          resources:
+            {{- toYaml .Values.mairror_front.resources | nindent 12 }}
+            {{- with .Values.mairror_front.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mairror_front.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mairror_front.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

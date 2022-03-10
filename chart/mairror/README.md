@@ -70,6 +70,36 @@ To install the chart with the release name `my-release`:
 | mairror_bot.serviceAccount.create | bool | `true` |  |
 | mairror_bot.serviceAccount.name | string | `"mairror-bot"` |  |
 | mairror_bot.tolerations | list | `[]` |  |
+| mairror_front.affinity | object | `{}` |  |
+| mairror_front.autoscaling | object | `{"enabled":false}` | Enable autoscaling |
+| mairror_front.container.name | string | `"mairror-front"` |  |
+| mairror_front.fullname | string | `"Mairror FRONT"` | This is the fullname |
+| mairror_front.image.pullPolicy | string | `"IfNotPresent"` |  |
+| mairror_front.image.repository | string | `"mairror/mairror-front"` |  |
+| mairror_front.image.tag | string | `"v1.0.2"` |  |
+| mairror_front.ingress.annotations | object | `{}` |  |
+| mairror_front.ingress.enabled | bool | `false` |  |
+| mairror_front.ingress.hosts | list | `[]` |  |
+| mairror_front.ingress.tls | list | `[]` |  |
+| mairror_front.nodeSelector | object | `{}` |  |
+| mairror_front.podAnnotations | object | `{}` |  |
+| mairror_front.podSecurityContext.fsGroup | int | `1000` |  |
+| mairror_front.replicaCount | int | `1` |  |
+| mairror_front.resources.limits.cpu | string | `"100m"` |  |
+| mairror_front.resources.limits.memory | string | `"128Mi"` |  |
+| mairror_front.resources.requests.cpu | string | `"100m"` |  |
+| mairror_front.resources.requests.memory | string | `"128Mi"` |  |
+| mairror_front.secrets.create | bool | `false` |  |
+| mairror_front.secrets.name | string | `"mairror-front-secret"` |  |
+| mairror_front.secrets.values | object | `{}` |  |
+| mairror_front.securityContext.runAsGroup | int | `1000` |  |
+| mairror_front.securityContext.runAsUser | int | `1000` |  |
+| mairror_front.service.annotations | object | `{}` |  |
+| mairror_front.service.port | int | `8501` |  |
+| mairror_front.service.type | string | `"ClusterIP"` |  |
+| mairror_front.serviceAccount.create | bool | `true` |  |
+| mairror_front.serviceAccount.name | string | `"mairror-front"` |  |
+| mairror_front.tolerations | list | `[]` |  |
 | mairror_predictor.affinity | object | `{}` |  |
 | mairror_predictor.autoscaling | object | `{"enabled":false}` | Enable autoscaling |
 | mairror_predictor.container.name | string | `"mairror-predictor"` |  |
