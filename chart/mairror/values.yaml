@@ -97,7 +97,7 @@ mairror_processor:
   image:
     pullPolicy: IfNotPresent
     repository: mairror/mairror-processor
-    tag: v1.2.0
+    tag: v1.3.0
   container:
     name: mairror-processor
   affinity: {}
