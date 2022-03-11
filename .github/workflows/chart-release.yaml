@@ -14,6 +14,10 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.PAT }}
 
+      - run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email 100847568+mairror-bot@users.noreply.github.com
+
       - uses: azure/setup-helm@v1
 
       - name: Chart releaser
@@ -29,16 +33,18 @@ jobs:
           ./cr package chart/mairror
           # upload chart to github releases
           ./cr upload \
-              --owner "$owner" \
+              --owner $owner \
               --git-repo "$repo" \
               --token "${{ secrets.PAT }}" \
               --commit "$(git rev-parse HEAD)" \
-              --skip-existing
+              --skip-existing \
+              --release-name-template "{{ .Name }}-{{ .Version }}"
           # Update index and push to github pages
           ./cr index \
-              --owner "$owner" \
+              --owner $owner \
               --git-repo "$repo" \
               --token "${{ secrets.PAT }}" \
               --charts-repo "https://mairror.github.io/helm-chart" \
               --index-path index.yaml \
-              --push
+              --push \
+              --release-name-template "{{ .Name }}-{{ .Version }}"
