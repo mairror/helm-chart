@@ -30,7 +30,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.mairror_api.fullnameOverride }}
 {{- .Values.mairror_api.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default "mairror-api" .Values.mairror_api.nameOverride }}
+{{- $name := default "api" .Values.mairror_api.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -43,7 +43,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.mairror_predictor.fullnameOverride }}
 {{- .Values.mairror_predictor.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default "mairror-predictor" .Values.mairror_predictor.nameOverride }}
+{{- $name := default "predictor" .Values.mairror_predictor.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -56,7 +56,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.mairror_bot.fullnameOverride }}
 {{- .Values.mairror_bot.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default "mairror-bot" .Values.mairror_bot.nameOverride }}
+{{- $name := default "bot" .Values.mairror_bot.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -69,7 +69,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.mairror_front.fullnameOverride }}
 {{- .Values.mairror_front.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default "mairror-front" .Values.mairror_front.nameOverride }}
+{{- $name := default "front" .Values.mairror_front.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -82,7 +82,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.mairror_processor.fullnameOverride }}
 {{- .Values.mairror_processor.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default "mairror-processor" .Values.mairror_processor.nameOverride }}
+{{- $name := default "processor" .Values.mairror_processor.nameOverride }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
