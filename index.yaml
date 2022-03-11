@@ -3,6 +3,19 @@ entries:
   mairror:
   - apiVersion: v2
     appVersion: v1.0.0
+    created: "2022-03-11T11:47:22.324386116Z"
+    description: A helm chart to deploy mairror application
+    digest: 5b6ef4c55f86f1ab9e86e982d77dbbae53f20d70b5dae05d952cd13bd46b6b62
+    maintainers:
+    - name: Alejandro Aceituna
+    - name: Borja López
+    name: mairror
+    type: application
+    urls:
+    - https://github.com/mairror/helm-chart/releases/download/mairror-0.0.3/mairror-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: v1.0.0
     created: "2022-03-11T09:47:37.697152281Z"
     description: A helm chart to deploy mairror application
     digest: e6be0596332eb1afe7f623f71f1dedab34a5fbe44aa137deb4161c2eed20ebcf
@@ -27,4 +40,4 @@ entries:
     urls:
     - https://github.com/mairror/helm-chart/releases/download/mairror-0.0.1/mairror-0.0.1.tgz
     version: 0.0.1
-generated: "2022-03-11T09:47:37.697166382Z"
+generated: "2022-03-11T11:47:22.324406816Z"
