@@ -33,19 +33,11 @@ spec:
             {{- toYaml .Values.mairror_processor.securityContext | nindent 12 }}
           image: "{{ .Values.mairror_processor.image.repository }}:{{ .Values.mairror_processor.image.tag }}"
           imagePullPolicy: {{ .Values.mairror_processor.image.pullPolicy }}
-          #livenessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: processor
-          #readinessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: processor
-{{- if .Values.mairror_processor.secrets.create -}}
+          {{- if .Values.mairror_processor.secrets.create }}
           envFrom:
           - secretRef:
               name: {{ .Values.mairror_processor.secrets.name }}
-{{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.mairror_processor.resources | nindent 12 }}
             {{- with .Values.mairror_processor.nodeSelector }}

@@ -37,19 +37,11 @@ spec:
             - name: predictor
               containerPort: 8000
               protocol: TCP
-          #livenessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: predictor
-          #readinessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: predictor
-{{- if .Values.mairror_predictor.secrets.create -}}
+          {{- if .Values.mairror_predictor.secrets.create }}
           envFrom:
           - secretRef:
               name: {{ .Values.mairror_predictor.secrets.name }}
-{{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.mairror_predictor.resources | nindent 12 }}
             {{- with .Values.mairror_predictor.nodeSelector }}

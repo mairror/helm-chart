@@ -37,19 +37,11 @@ spec:
             - name: api
               containerPort: 8000
               protocol: TCP
-          #livenessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: api
-          #readinessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: api
-{{- if .Values.mairror_api.secrets.create -}}
+          {{- if .Values.mairror_api.secrets.create }}
           envFrom:
           - secretRef:
               name: {{ .Values.mairror_api.secrets.name }}
-{{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.mairror_api.resources | nindent 12 }}
             {{- with .Values.mairror_api.nodeSelector }}
