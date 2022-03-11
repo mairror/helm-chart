@@ -3,8 +3,8 @@
   "plugins": [
     [
         "semantic-release-helm", {
-            chartPath: './chart',
-            onlyUpdateVersion: true
+            chartPath: './chart/mairror',
+            onlyUpdateVersion: false
         }
     ],
     "@semantic-release/github", {
